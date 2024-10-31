@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from api.models import User, Data, Device
 from api.serializers import UserSerializer, DataSerializer, DeviceSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
@@ -20,8 +21,10 @@ class UserList(generics.ListCreateAPIView):
 
 class DeviceList(generics.ListCreateAPIView):
     serializer_class = DeviceSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        permission_classes = [IsAuthenticated]
         queryset = Device.objects.all()
         user = self.request.query_params.get('user', None)
         if user is not None:
@@ -31,8 +34,10 @@ class DeviceList(generics.ListCreateAPIView):
 
 class DataList(generics.ListCreateAPIView):
     serializer_class = DataSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        permission_classes = [IsAuthenticated]
         queryset = Data.objects.all().order_by('-created_at')
         data = self.request.query_params.get('data', None)
         if data is not None:

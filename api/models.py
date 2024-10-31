@@ -3,7 +3,7 @@ import datetime
 
 # Create your models here.
 # User : jospin
-# User : admin
+# password : admin
 
 
 class User(models.Model):
