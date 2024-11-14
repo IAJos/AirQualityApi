@@ -21,10 +21,10 @@ class UserList(generics.ListCreateAPIView):
 
 class DeviceList(generics.ListCreateAPIView):
     serializer_class = DeviceSerializer
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        permission_classes = [IsAuthenticated]
+        #permission_classes = [IsAuthenticated]
         queryset = Device.objects.all()
         user = self.request.query_params.get('user', None)
         if user is not None:
@@ -34,10 +34,10 @@ class DeviceList(generics.ListCreateAPIView):
 
 class DataList(generics.ListCreateAPIView):
     serializer_class = DataSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        permission_classes = [IsAuthenticated]
+        # permission_classes = [IsAuthenticated]
         queryset = Data.objects.all().order_by('-created_at')
         data = self.request.query_params.get('data', None)
         if data is not None:

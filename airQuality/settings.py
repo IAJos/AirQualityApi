@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-&b6s^49_86z*t+w6549w3x95d-3kn@%4s2*ex1zbb69k2ln*#f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['192.168.20.139']  # SCHOOL
+ALLOWED_HOSTS = ['192.168.20.139', '192.168.2.23', 'http://localhost:8002/']  # HOME
 
 
 # Application definition
@@ -81,6 +82,20 @@ WSGI_APPLICATION = 'airQuality.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': 'airQualityDB',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'admin',
+
+        'HOST': 'localhost',
+
+        'PORT': '5432',
+        },
+
+    'default_sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }

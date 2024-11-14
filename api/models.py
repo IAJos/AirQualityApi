@@ -16,7 +16,10 @@ class User(models.Model):
     phone_number = models.fields.CharField(max_length=50)
     username = models.fields.CharField(max_length=20, null=True)
     password = models.fields.CharField(max_length=10)
-    created_at = models.fields.DateTimeField(default=datetime.datetime.now)
+    created_at = models.fields.DateTimeField(default=datetime.datetime.now, null=True)
+
+    class Meta:
+        db_table = 'users'
 
 
 class Device(models.Model):
@@ -30,8 +33,10 @@ class Device(models.Model):
 
     name = models.fields.CharField(max_length=20, unique=True)
     mode = models.fields.IntegerField(choices=DeviceMode.choices, null=True)
-    created_at = models.fields.DateTimeField(default=datetime.datetime.now)
+    created_at = models.fields.DateTimeField(default=datetime.datetime.now, null=True)
     User = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+
+    class Meta: db_table = 'devices'
 
 
 class Data(models.Model):
@@ -41,5 +46,8 @@ class Data(models.Model):
     quantityO3 = models.fields.IntegerField(null=True)
     fine_particle = models.fields.IntegerField(null=True)
     temperature = models.fields.FloatField(null=True)
-    created_at = models.fields.DateTimeField(default=datetime.datetime.now)
+    created_at = models.fields.DateTimeField(default=datetime.datetime.now, null=True)
     device_name = models.ForeignKey(Device, to_field='name', null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'data'
